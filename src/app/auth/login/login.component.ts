@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { forbiddenNameValidator } from '../customValidator.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +10,17 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
   signinForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, , forbiddenNameValidator()]],
     password: ['', [Validators.required, Validators.minLength(3)]]
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -23,8 +31,7 @@ export class LoginComponent implements OnInit {
     if (this.signinForm.valid && this.signinForm.touched) {
       const email = this.signinForm.get('email').value.trim();
       const password = this.signinForm.get('password').value;
-      console.log(email, password);
-      // await this.authService.logIn({ email, password });
+      this.authService.login({ email, password });
     }
   }
 
