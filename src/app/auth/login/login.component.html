@@ -31,7 +31,7 @@
       </div>
       <div class=" alert alert-danger p-0 mb-0" role="alert"
         *ngIf="signinForm.controls['password'].hasError('minlength') && !signinForm.controls['password'].hasError('required')">
-        More than <strong>2 Characters</strong>
+        More than <strong>6 Characters</strong>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2020-2031</p>
     <!-- Form Error -->
-    <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="signinForm.hasError('accountExit')">
-      Account {{signinForm.controls['email'].value}} already <strong>Exist</strong>
+    <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="signinForm.hasError('userPass')">
+    Wrong <strong>User</strong> or <strong>Password</strong>
     </div>
 </form>
