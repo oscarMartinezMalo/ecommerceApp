@@ -1,6 +1,14 @@
-<a [routerLink]="['/admin/products/new']" routerLinkActive="router-link-active" class="btn btn-primary m-4">New Product</a>
+<a [routerLink]="['/admin/products/new']" routerLinkActive="router-link-active" class="btn btn-primary m-4">New
+  Product</a>
 
-<table class="table">
+<p>
+  <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search---">
+</p>
+
+<!-- <data-table [items]="filterProducts">
+</data-table> -->
+
+<!-- <table class="table">
   <thead>
     <tr>
       <th>Title</th>
@@ -9,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let p of products$ |async">
+    <tr *ngFor="let p of filterProducts">
       <td>{{ p.title }}</td>
       <td>{{ p.price}}</td>
       <td>
@@ -17,4 +25,4 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->

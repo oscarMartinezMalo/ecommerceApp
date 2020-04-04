@@ -11,7 +11,7 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { HomeComponent } from './core/home/home.component';
-import { ProductsComponent } from './product/products/products.component';
+import { ProductsComponent } from './product/products.component';
 import { ShoppingCarComponent } from './shopping-car/shopping-car.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
@@ -24,7 +24,7 @@ import { AppErrorHandler } from './common/app-error-handler';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './common/category.service';
-import { ProductService } from './product.service';
+import { ProductService } from './product/product.service';
 
 @NgModule({
   declarations: [
