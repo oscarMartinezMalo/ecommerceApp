@@ -4,8 +4,10 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { HomeComponent } from './core/home/home.component';
@@ -19,6 +21,10 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AppErrorHandler } from './common/app-error-handler';
+import { TokenInterceptorService } from './auth/token-interceptor.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './common/category.service';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -33,17 +39,23 @@ import { AppErrorHandler } from './common/app-error-handler';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    RxReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [
-    { provide: ErrorHandler, useClass: AppErrorHandler }
+    CategoryService,
+    ProductService,
+    { provide: ErrorHandler, useClass: AppErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

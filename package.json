@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
     "@ng-bootstrap/ng-bootstrap": "^6.0.2",
+    "@rxweb/reactive-form-validators": "^1.9.9-beta4",
     "bootstrap": "^4.4.1",
     "rxjs": "^6.5.4",
     "tslib": "^1.10.0",
