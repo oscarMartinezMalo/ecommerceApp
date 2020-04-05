@@ -1,14 +1,11 @@
-<a [routerLink]="['/admin/products/new']" routerLinkActive="router-link-active" class="btn btn-primary m-4">New
+<a [routerLink]="['/admin/products/new']" routerLinkActive="router-link-active" class="btn btn-primary mb-4">New
   Product</a>
 
 <p>
   <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search---">
 </p>
 
-<!-- <data-table [items]="filterProducts">
-</data-table> -->
-
-<!-- <table class="table">
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
@@ -25,4 +22,15 @@
       </td>
     </tr>
   </tbody>
-</table> -->
+</table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="(5)!" [page]="1" [pageSize]="3">
+    </ngb-pagination>
+
+    <select class="custom-select" style="width: auto" >
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>

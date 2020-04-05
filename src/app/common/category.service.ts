@@ -14,7 +14,7 @@ export class CategoryService {
     private http: HttpClient
   ) { }
 
-  getCategories() {
+  getAll() {
     return this.http.get(this.BASE_URL).
       pipe(take(1),
         catchError((error: Response) => {
