@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       const password = this.signinForm.get('password').value;
       this.authService.login({ email, password })
         .subscribe(resp => {
-          console.log(resp);
+          // console.log(resp);
         },
         (error: AppError) => {
           if (error instanceof WrongCredentialError) {

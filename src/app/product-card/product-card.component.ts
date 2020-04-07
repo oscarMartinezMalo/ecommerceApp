@@ -1,11 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../products/product.model';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
-
-interface Item {
-  quantity: number;
-  product: Product;
-}
+import { Item } from '../shopping-cart/shopping-cart.model';
 
 @Component({
   selector: 'app-product-card',
@@ -21,13 +17,16 @@ export class ProductCardComponent {
     private cartService: ShoppingCartService
   ) { }
 
-  addToCart(product: Product) {
-    this.cartService.addToCart(product);
+  async addToCart() {
+    await this.cartService.addToCart(this.product);
+  }
+
+  removeFromCart() {
+    this.cartService.removeFromCart(this.product);
   }
 
   getQuantity() {
     if (!this.cart) { return 0; }
-    console.log(this.cart.items);
     const cartItem = (this.cart.items as Item[]).find(item => {
       return item.product.id === this.product.id;
     });
