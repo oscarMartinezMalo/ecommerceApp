@@ -1,0 +1,12 @@
+<div class="row container">
+  <div class="col-3 mt-3">
+    <app-product-filter [category]="category"></app-product-filter>
+  </div>
+  <div class="col">
+    <div class="row justify-content-md-between justify-content-center">
+      <div *ngFor="let product of filteredProducts">
+        <app-product-card [product]="product" [cart]="cart" [showActions]="true"></app-product-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './core/home/home.component';
-import { ProductsComponent } from './product/products.component';
-import { ShoppingCarComponent } from './shopping-car/shopping-car.component';
+import { ProductsComponent } from './products/products.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -16,7 +15,6 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 const routes: Routes = [
   { path: '', component: ProductsComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'shopping-car', component: ShoppingCarComponent },
   { path: 'check-out', component: CheckOutComponent },
   { path: 'order-success', component: OrderSuccessComponent },
   { path: 'my/orders', component: MyOrdersComponent },

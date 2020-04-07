@@ -1,0 +1,12 @@
+<div class="card" style="width: 20rem;border:.5px solid gainsboro;" class="mt-3" *ngIf="product.title">
+  <img class="card-img-top" style=" height: 250px;" [src]="product.imageUrl" alt="Card image cap"
+    *ngIf="product.imageUrl">
+  <div class="card-body">
+    <h5 class="card-title">{{product.title}}</h5>
+    <p class="card-text">{{ product.price | currency:'USD':true}}</p>
+  </div>
+  <div class="card-footer" *ngIf="showActions">
+    <button (click)="addToCart(product)" class="btn btn-primary btn-block">Add to card</button>
+  </div>
+  <div>{{ getQuantity()}}</div>
+</div>

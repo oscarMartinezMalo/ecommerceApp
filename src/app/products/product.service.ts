@@ -31,7 +31,6 @@ export class ProductService {
   }
 
   getById(id: string) {
-    console.log(id);
     return this.http.get(this.BASE_URL + id).
       pipe(take(1),
         catchError((error: Response) => {
