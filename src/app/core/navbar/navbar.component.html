@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/shopping-car']" routerLinkActive="router-link-active" >
+        <a class="nav-link" [routerLink]="['/shopping-cart']" routerLinkActive="router-link-active" >
           Shopping Cart
           <span *ngIf="cart$ | async as cart " class="badge badge-warning badge-pill">
             {{ cart.totalItemsCount }}
