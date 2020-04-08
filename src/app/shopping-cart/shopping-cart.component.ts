@@ -18,8 +18,8 @@ export class ShoppingCartComponent {
     this.shoppingCartService.getCart();
   }
 
-  clearCart() {
-    this.shoppingCartService.clearCart();
+  async clearCart() {
+   this.shoppingCartService.clearCart();
   }
 
 }

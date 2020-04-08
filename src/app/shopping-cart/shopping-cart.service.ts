@@ -37,8 +37,12 @@ export class ShoppingCartService {
 
   async clearCart() {
     const cartId = await this.getOrCreateCartId();
-    //
-    // Delete all the ites of this cart
+    this.http.delete(this.BASE_URL + cartId)
+    .pipe(take(1))
+    .subscribe(cart => {
+      const newCart = this.createShoppingCart(cart);
+      this.cart$.next(newCart);
+    });
   }
 
   private async create() {

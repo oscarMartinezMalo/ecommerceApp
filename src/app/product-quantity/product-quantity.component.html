@@ -1,6 +1,6 @@
 <div class="row no-gutters">
   <div class="col-2">
-    <button class="btn btn-secondary btn-block" (click)="removeFromCart()">-</button>
+    <button class="btn btn-secondary btn-block" (click)="removeFromCart()" [disabled]="cart.getQuantity(product) === 0">-</button>
   </div>
   <div class="col text-center align-self-center">
     {{ cart.getQuantity(product)}} in cart
