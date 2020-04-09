@@ -13,10 +13,16 @@ interface EmailPassword {
   password: string;
 }
 
+export interface User {
+  id: string;
+  email: string;
+}
+
 interface LoginResponse {
+  id: string;
+  email: string;
   accessToken: string;
   refreshToken: string;
-  email: string;
 }
 
 @Injectable({
@@ -26,7 +32,7 @@ export class AuthService {
   readonly BASE_URL = 'http://localhost:3000/auth';
   readonly REFRESH_TOKEN = 'JWT_TOKEN';
   readonly JWT_TOKEN = 'REFRESH_TOKEN';
-  user$ = new BehaviorSubject('');
+  user$: BehaviorSubject<User> = new BehaviorSubject(null);
   // user$ = new Subject<string>();
 
   constructor(
@@ -35,7 +41,7 @@ export class AuthService {
     private router: Router
   ) {
     // Send the token to get the user in case the user refresh the page
-   }
+  }
 
   signup(emailPassword: EmailPassword) {
     return this.http.post(this.BASE_URL + '/signup', emailPassword).
@@ -55,7 +61,7 @@ export class AuthService {
       pipe(take(1), map((token: LoginResponse) => {
         localStorage.setItem(this.JWT_TOKEN, token.accessToken);
         localStorage.setItem(this.REFRESH_TOKEN, token.refreshToken);
-        this.user$.next(token.email);
+        this.user$.next({ id: token.id, email: token.email });
         this.router.navigate([returnUrl]);
       }),
         catchError((error: Response) => {
@@ -80,5 +86,7 @@ export class AuthService {
   logOut() {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
+    this.user$.next(null);
+    this.router.navigate(['/']);
   }
 }

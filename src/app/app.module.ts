@@ -30,6 +30,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 import { AuthGuard } from './guards/auth-guard.service';
+import { OrderService } from './order/order.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { AuthGuard } from './guards/auth-guard.service';
     CategoryService,
     ProductService,
     ShoppingCartService,
+    OrderService,
     { provide: ErrorHandler, useClass: AppErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
   ],
