@@ -11,12 +11,13 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AuthGuard } from './guards/auth-guard.service';
 
 
 const routes: Routes = [
   { path: '', component: ProductsComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'check-out', component: CheckOutComponent },
+  { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
   { path: 'order-success', component: OrderSuccessComponent },
   { path: 'my/orders', component: MyOrdersComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },

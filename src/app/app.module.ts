@@ -29,6 +29,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { AuthGuard } from './guards/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     HttpClientModule
   ],
   providers: [
+    AuthGuard,
     CategoryService,
     ProductService,
     ShoppingCartService,
