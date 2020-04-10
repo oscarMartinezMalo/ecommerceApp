@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+  <form #f="ngForm" (ngSubmit)="placeOrder(f.value)" class="container col-md-6" style="max-width: 500px;">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input #name="ngModel" [(ngModel)]="shipping.name" name="name" id="name" type="text" class="form-control"
+        required />
+      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="name.touched && name.invalid">
+        Name is <strong>required.</strong>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input #address="ngModel" [(ngModel)]="shipping.address" name="address" id="address" type="text"
+        class="form-control" required />
+      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="address.touched && address.invalid">
+        Address is <strong>required.</strong>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="apartment">Suit or Aparment</label>
+      <input #apartment="ngModel" [(ngModel)]="shipping.apartment" name="apartment" id="apartment" type="text"
+        class="form-control" required />
+      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="apartment.touched && apartment.invalid">
+        Apartment is <strong>required.</strong>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input #city="ngModel" [(ngModel)]="shipping.city" name="city" id="city" type="text" class="form-control"
+        required />
+      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="city.touched && city.invalid">
+        City is <strong>required.</strong>
+      </div>
+    </div>
+
+    <button class="btn btn-primary mt-2 mb-2 " [disabled]="!f.form.valid">Save</button>
+  </form>
+</div>

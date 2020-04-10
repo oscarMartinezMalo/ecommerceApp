@@ -1,10 +1,13 @@
 import { ShoppingCart } from '../shopping-cart/shopping-cart.model';
+import { Shipping } from '../shipping-form/shipping-form.component';
 
 export class Order {
+  // tslint:disable-next-line:variable-name
+  _id: string;
   datePlaced: number;
   items: any[];
 
-  constructor(public userId: string, public shipping: any, shoppingCart: ShoppingCart) {
+  constructor(public userId: string, public shipping: Shipping, shoppingCart: ShoppingCart) {
     this.datePlaced = new Date().getTime();
 
     this.items = shoppingCart.items.map(i => {
