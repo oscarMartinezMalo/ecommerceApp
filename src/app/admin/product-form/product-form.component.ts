@@ -41,7 +41,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   async delete() {
-    if ( confirm('Are you sure you want to delete this product')){
+    if ( confirm('Are you sure you want to delete this product')) {
       await this.productService.delete(this.id);
       this.router.navigate(['/admin/products']);
     }

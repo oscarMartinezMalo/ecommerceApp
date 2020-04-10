@@ -1,6 +1,6 @@
+<h1 class="text-center">Check Out</h1>
 <div class="row justify-content-center">
-  <div>
-    <form #f="ngForm" (ngSubmit)="placeOrder(f.value)">
+    <form #f="ngForm" (ngSubmit)="placeOrder(f.value)"  class="col-md-6" style="max-width: 500px;">
       <div class="form-group">
         <label for="name">Name</label>
         <input #name="ngModel" [(ngModel)]="shipping.name" name="name" id="name" type="text" class="form-control"
@@ -39,5 +39,4 @@
 
       <button class="btn btn-primary mt-2 mb-2 " [disabled]="!f.form.valid">Save</button>
     </form>
-  </div>
 </div>

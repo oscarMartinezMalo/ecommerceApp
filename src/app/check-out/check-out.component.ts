@@ -37,11 +37,8 @@ export class CheckOutComponent implements OnInit {
 
 
   placeOrder(shipping) {
-    console.log('cart', this.cart);
-    console.log('id', this.user.id);
-    let x = new Order(this.user.id, shipping, this.cart);
-    console.log(x);
-    // this.orderService.storeOrder(order);
+    const order = new Order(this.user.id, shipping, this.cart);
+    this.orderService.storeOrder(order);
   }
 
 }
