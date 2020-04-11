@@ -23,4 +23,10 @@ export class OrderDetailsComponent {
       this.orderService.getOrderById(orderId).then(order => { this.order = order; });
     }
   }
+
+  get totalPrice() {
+    let total = 0;
+    this.order.items.forEach(item => { total += item.totalPrice; });
+    return total;
+  }
 }

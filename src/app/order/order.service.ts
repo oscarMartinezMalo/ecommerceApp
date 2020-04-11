@@ -19,8 +19,8 @@ export class OrderService {
     return result;
   }
 
-  async getMyOrders(userId: string) {
-    const result = await this.http.get(this.BASE_URL + userId ).toPromise() as Promise<Order[]>;
+  async getMyOrders() {
+    const result = await this.http.get(this.BASE_URL + 'by-user' ).toPromise() as Promise<Order[]>;
     return result;
   }
 

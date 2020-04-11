@@ -22,14 +22,4 @@ export class Order {
       };
     });
   }
-
-  // get totalPrice() {
-  //   console.log('here');
-  //   let total = 0;
-  //   this.items.forEach(item => {
-  //     total += item.totalPrice;
-  //     console.log(item.totalPrice);
-  //   });
-  //   return total;
-  // }
 }
