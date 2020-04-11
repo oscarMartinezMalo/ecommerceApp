@@ -33,6 +33,7 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { OrderService } from './order/order.service';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
     ShoppingCartComponent,
     ProductQuantityComponent,
     ShoppingCartSummaryComponent,
-    ShippingFormComponent
+    ShippingFormComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

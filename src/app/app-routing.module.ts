@@ -12,6 +12,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AuthGuard } from './guards/auth-guard.service';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
   { path: 'order-success/:id', component: OrderSuccessComponent },
   { path: 'my/orders', component: MyOrdersComponent },
+  { path: 'my/orders/:id', component: OrderDetailsComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },

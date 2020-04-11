@@ -10,6 +10,4 @@ export class ShoppingCartSummaryComponent {
   @Input() cart: ShoppingCart;
 
   constructor() { }
-
-
 }

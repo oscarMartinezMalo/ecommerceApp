@@ -19,11 +19,6 @@ export class OrderService {
     return result;
   }
 
-  async getOrders(userId: string) {
-    const result = await this.http.get(this.BASE_URL + '/orders').toPromise() as Promise<Order[]>;
-    return result;
-  }
-
   async getMyOrders(userId: string) {
     const result = await this.http.get(this.BASE_URL + userId ).toPromise() as Promise<Order[]>;
     return result;
@@ -31,6 +26,11 @@ export class OrderService {
 
   async getAllOrders(userId: string) {
     const result = await this.http.get(this.BASE_URL).toPromise() as Promise<Order[]>;
+    return result;
+  }
+
+  async getOrderById( orderId: string){
+    const result = await this.http.get(this.BASE_URL + 'by-order-id/' + orderId).toPromise() as Promise<Order>;
     return result;
   }
 }

@@ -1,4 +1,4 @@
-import { ShoppingCart } from '../shopping-cart/shopping-cart.model';
+import { ShoppingCart, Item } from '../shopping-cart/shopping-cart.model';
 import { Shipping } from '../shipping-form/shipping-form.component';
 
 export class Order {
@@ -22,4 +22,14 @@ export class Order {
       };
     });
   }
+
+  // get totalPrice() {
+  //   console.log('here');
+  //   let total = 0;
+  //   this.items.forEach(item => {
+  //     total += item.totalPrice;
+  //     console.log(item.totalPrice);
+  //   });
+  //   return total;
+  // }
 }
