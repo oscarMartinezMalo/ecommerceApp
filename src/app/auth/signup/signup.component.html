@@ -1,5 +1,5 @@
 <form [formGroup]="signupForm" class="form-signup text-center" (ngSubmit)="onSubmit()" novalidate>
-  <img class="mb-4" src="../../assets/diamond.svg" alt="" width="72" height="72">
+  <img class="mb-4" src="../../../assets/iconRed.svg" alt="" width="72" height="72">
 
   <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
 
@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+  <button class="btn btn-lg btn-dark btn-block" type="submit">Sign up</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2020-2031</p>
   <!-- Form Error -->
   <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="signupForm.hasError('accountExit')">

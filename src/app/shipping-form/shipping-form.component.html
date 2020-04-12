@@ -1,5 +1,6 @@
 <div class="row justify-content-center">
   <form #f="ngForm" (ngSubmit)="placeOrder(f.value)" class="container col-md-6" style="max-width: 500px;">
+      <h3> Shipping Information</h3>
     <div class="form-group">
       <label for="name">Name</label>
       <input #name="ngModel" [(ngModel)]="shipping.name" name="name" id="name" type="text" class="form-control"
@@ -36,6 +37,6 @@
       </div>
     </div>
 
-    <button class="btn btn-primary mt-2 mb-2 " [disabled]="!f.form.valid">Save</button>
+    <button class="btn btn-secondary mt-2 mb-2 " [disabled]="!f.form.valid">Save</button>
   </form>
 </div>

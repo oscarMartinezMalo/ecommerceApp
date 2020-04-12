@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" style="padding: 0 70px 0 70px;">
   <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
-    Logo
+    <img src="../../../assets/icon.svg" style="width: 30px; height: 30px;">
   </a>
 
   <i class="fas fa-gem"></i>
@@ -14,7 +14,7 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/shopping-cart']" routerLinkActive="router-link-active">
           <i class="fa fa-shopping-cart"></i>
-          <span *ngIf="cart$ | async as cart " class="badge badge-warning badge-pill  ml-1">
+          <span *ngIf="cart$ | async as cart " class="badge badge-secondary badge-pill  ml-1">
             {{ cart.totalItemsCount }}
           </span>
         </a>

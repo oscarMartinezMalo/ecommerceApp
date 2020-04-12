@@ -8,15 +8,15 @@ import { AuthService } from './auth.service';
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // const tokenizedReq = req.clone({
     //   setHeaders: { Authorization: `${this.authService.JWT_TOKEN} ${this.authService.getToken()}` }
     // });
-
+    const token = localStorage.getItem('JWT_TOKEN');
     const tokenizedReq = req.clone({
-      headers: req.headers.set('auth-token', 'Bearer ' + this.authService.getToken())
+      headers: req.headers.set('auth-token', 'Bearer ' + token)
     });
     return next.handle(tokenizedReq);
   }

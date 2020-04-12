@@ -30,8 +30,8 @@ interface LoginResponse {
 })
 export class AuthService {
   readonly BASE_URL = 'http://localhost:3000/auth';
-  readonly REFRESH_TOKEN = 'JWT_TOKEN';
-  readonly JWT_TOKEN = 'REFRESH_TOKEN';
+  readonly JWT_TOKEN = 'JWT_TOKEN';
+  readonly REFRESH_TOKEN  = 'REFRESH_TOKEN';
   user$: BehaviorSubject<User> = new BehaviorSubject(null);
   // user$ = new Subject<string>();
 
@@ -41,6 +41,17 @@ export class AuthService {
     private router: Router
   ) {
     // Send the token to get the user in case the user refresh the page
+    http.get(this.BASE_URL).pipe(take(1),
+      catchError((error: Response) => {
+        if (error.status === 401) {
+          // Create User is Not Authenticated
+        } else {
+          return throwError(new AppError(error));
+        }
+      })).
+    subscribe(
+      user => this.user$.next( user as User ),
+      error => console.log('User Not Authenticated'));
   }
 
   signup(emailPassword: EmailPassword) {
@@ -72,14 +83,14 @@ export class AuthService {
         }));
   }
 
-  getToken() {
-    return localStorage.getItem(this.JWT_TOKEN);
-  }
+  // getToken() {
+  //   return localStorage.getItem(this.JWT_TOKEN);
+  // }
 
   refreshToken() {
     this.http.get(this.BASE_URL + 'refresh').
-      pipe(take(1)).subscribe((resfreshToken: { accessToken: string }) => {
-        localStorage.setItem(this.JWT_TOKEN, resfreshToken.accessToken);
+      pipe(take(1)).subscribe((token: { accessToken: string }) => {
+        localStorage.setItem(this.JWT_TOKEN, token.accessToken);
       });
   }
 
