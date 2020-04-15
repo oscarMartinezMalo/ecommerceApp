@@ -10,18 +10,16 @@ import { ModalComponent } from './modal/modal.component';
 export class HttpErrorService {
 
   constructor(
-     private router: Router,
      private modalService: NgbModal
     ) { }
 
   displayError() {
     this.openPopUp();
-    this.router.navigate(['/']);
   }
 
   async openPopUp() {
     const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.title = 'Your session has expired';
-    modalRef.componentInstance.message = 'To Access, please Login again!!';
+    modalRef.componentInstance.title = 'Warning';
+    modalRef.componentInstance.message = 'To Access, please Login!!';
   }
 }

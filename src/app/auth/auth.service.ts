@@ -30,7 +30,7 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  readonly BASE_URL = 'http://localhost:3000/auth';
+  readonly BASE_URL = 'http://localhost:3000/auth/';
   readonly JWT_TOKEN = 'JWT_TOKEN';
   readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   // Set to Undefined to check in the Guard when refresh the page
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   signup(emailPassword: EmailPassword) {
-    return this.http.post(this.BASE_URL + '/signup', emailPassword).
+    return this.http.post(this.BASE_URL + 'signup', emailPassword).
       pipe(take(1),
         catchError((error: Response) => {
           if (error.status === 403) {
@@ -67,7 +67,7 @@ export class AuthService {
   login(emailPassword: EmailPassword) {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
 
-    return this.http.post(this.BASE_URL + '/login', emailPassword).
+    return this.http.post(this.BASE_URL + 'login', emailPassword).
       pipe(take(1), map((token: LoginResponse) => {
         localStorage.setItem(this.JWT_TOKEN, token.accessToken);
         localStorage.setItem(this.REFRESH_TOKEN, token.refreshToken);
@@ -85,7 +85,7 @@ export class AuthService {
   refreshToken() {
     const refreshToken = localStorage.getItem(this.REFRESH_TOKEN);
 
-    return this.http.post(this.BASE_URL + '/refresh-token', { refreshToken }).
+    return this.http.post(this.BASE_URL + 'refresh-token', { refreshToken }).
       pipe(take(1), tap((token: { accessToken: string }) => {
         localStorage.setItem(this.JWT_TOKEN, token.accessToken);
       }));
@@ -95,10 +95,16 @@ export class AuthService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  logOut() {
+  async logOut() {
+    const refreshToken = localStorage.getItem(this.REFRESH_TOKEN);
+    this.http.delete(this.BASE_URL + refreshToken).pipe(
+      catchError((error: Response) => {
+        return throwError(new AppError(error));
+      }))
+    .subscribe();
+
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
     this.user$.next(null);
-    this.router.navigate(['/']);
   }
 }

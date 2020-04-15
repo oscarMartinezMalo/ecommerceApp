@@ -18,17 +18,15 @@ export class TokenInterceptorService implements HttpInterceptor {
     return next.handle(tokenizedReq)
       .pipe(
         catchError((error: HttpErrorResponse) => {
+          const authService = this.injector.get(AuthService);
           if (error.status === 401) {
-
-            const authService = this.injector.get(AuthService);
             return authService.refreshToken().pipe(switchMap(() => {
               const newReq = this.addTokenToHeader(req);
               return next.handle(newReq);
             }));
-
-          } else {
-            return throwError(error);
           }
+
+          return throwError(error);
         })
       );
   }

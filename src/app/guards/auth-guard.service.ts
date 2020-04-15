@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { map, take, catchError } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
+import { HttpErrorService } from '../common/http-error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private httpErrorService: HttpErrorService
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
@@ -20,6 +22,8 @@ export class AuthGuard implements CanActivate {
       if (user) { return true; }
 
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+      this.authService.logOut();
+      this.httpErrorService.displayError();
       return false;
     }));
   }

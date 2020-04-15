@@ -10,31 +10,30 @@
     </span>
   </a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+  <button (click)="isCollapsed = !isCollapsed" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
     aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-
+  <div  [ngbCollapse]="isCollapsed" class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
     <ul class="navbar-nav">
-      <li class="nav-item mr-2" *ngIf="!user">
-        <a class="btn btn-light" [routerLink]="['/login']" routerLinkActive="btn-dark">Login</a>
+      <li class="nav-item mr-md-2" *ngIf="!user">
+        <a  (click)="isCollapsed = !isCollapsed" class="btn btn-light btn-block" [routerLink]="['/login']" routerLinkActive="btn-dark">Login</a>
       </li>
       <li class="nav-item" *ngIf="!user">
-        <a class="btn btn-light" [routerLink]="['/signup']" routerLinkActive="btn-dark">Signup</a>
+        <a  (click)="isCollapsed = !isCollapsed" class="btn btn-light btn-block" [routerLink]="['/signup']" routerLinkActive="btn-dark">Signup</a>
       </li>
 
       <li ngbDropdown class="nav-item dropdown" *ngIf="user">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown"
+        <a ngbDropdownToggle class="btn btn-dark btn-block text-center text-light" id="dropdown01" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">{{ user.email }}</a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" [routerLink]="['/my/orders']" routerLinkActive="router-link-active">My Orders</a>
-          <a class="dropdown-item" [routerLink]="['/admin/orders']" routerLinkActive="router-link-active">Manage
+          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" [routerLink]="['/my/orders']" routerLinkActive="router-link-active">My Orders</a>
+          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" [routerLink]="['/admin/orders']" routerLinkActive="router-link-active">Manage
             Orders</a>
-          <a class="dropdown-item" [routerLink]="['/admin/products']" routerLinkActive="router-link-active">Manage
+          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" [routerLink]="['/admin/products']" routerLinkActive="router-link-active">Manage
             Products</a>
-          <a class="dropdown-item" (click)="logOut()">Log Out</a>
+          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" (click)="logOut()">Log Out</a>
         </div>
       </li>
     </ul>
