@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { map, take, catchError } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { HttpErrorService } from '../common/http-error.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AdminAuthGuard implements CanActivate  {
 
   constructor(
     private authService: AuthService,
@@ -18,11 +18,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
     return this.authService.getUser().pipe(map(user => {
-      if (user) { return true; }
-
-      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-      this.authService.logOut();
-      this.httpErrorService.displayError();
+      if (user.role === 'Admin') { return true; }
       return false;
     }));
   }

@@ -14,6 +14,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ErrorPageComponent } from './common/error-page/error-page.component';
+import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 
 
 const routes: Routes = [
@@ -26,11 +27,11 @@ const routes: Routes = [
   { path: 'shopping-cart', component: ShoppingCartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard] },
-  { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard] },
-  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard] },
-  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard] },
-  { path: 'admin/orders/:id', component: OrderDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: 'admin/orders/:id', component: OrderDetailsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
   { path: 'not_found', component: ErrorPageComponent, data: { message: 'This page can’t be reached'} },
   { path: '**', redirectTo: '/not_found' }
 

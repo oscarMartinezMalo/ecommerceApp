@@ -17,11 +17,13 @@ interface EmailPassword {
 export interface User {
   id: string;
   email: string;
+  role: string;
 }
 
 interface LoginResponse {
   id: string;
   email: string;
+  role: string;
   accessToken: string;
   refreshToken: string;
 }
@@ -71,7 +73,7 @@ export class AuthService {
       pipe(take(1), map((token: LoginResponse) => {
         localStorage.setItem(this.JWT_TOKEN, token.accessToken);
         localStorage.setItem(this.REFRESH_TOKEN, token.refreshToken);
-        this.user$.next({ id: token.id, email: token.email });
+        this.user$.next({ id: token.id, email: token.email, role: token.role });
         this.router.navigate([returnUrl]);
       }),
         catchError((error: Response) => {
