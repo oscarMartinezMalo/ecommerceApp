@@ -1,23 +1,42 @@
-import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable, Injector } from '@angular/core';
+import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
+import { catchError, retry, switchMap } from 'rxjs/operators';
+import { HttpErrorService } from '../common/http-error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private injector: Injector, private httpErrorService: HttpErrorService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // const tokenizedReq = req.clone({
-    //   setHeaders: { Authorization: `${this.authService.JWT_TOKEN} ${this.authService.getToken()}` }
-    // });
-    const token = localStorage.getItem('JWT_TOKEN');
-    const tokenizedReq = req.clone({
-      headers: req.headers.set('auth-token', 'Bearer ' + token)
-    });
-    return next.handle(tokenizedReq);
+    const tokenizedReq = this.addTokenToHeader(req);
+
+    return next.handle(tokenizedReq)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 401) {
+
+            const authService = this.injector.get(AuthService);
+            return authService.refreshToken().pipe(switchMap(() => {
+              const newReq = this.addTokenToHeader(req);
+              return next.handle(newReq);
+            }));
+
+          } else {
+            return throwError(error);
+          }
+        })
+      );
   }
+
+  addTokenToHeader(req: HttpRequest<any>) {
+    const token = localStorage.getItem('JWT_TOKEN');
+    const tokenizedReq = req.clone({ headers: req.headers.set('auth-token', 'Bearer ' + token) });
+    return tokenizedReq;
+  }
+
 }

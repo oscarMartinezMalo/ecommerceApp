@@ -13,23 +13,26 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { ErrorPageComponent } from './common/error-page/error-page.component';
 
 
 const routes: Routes = [
   { path: '', component: ProductsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
-  { path: 'order-success/:id', component: OrderSuccessComponent },
-  { path: 'my/orders', component: MyOrdersComponent },
-  { path: 'my/orders/:id', component: OrderDetailsComponent },
+  { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+  { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
+  { path: 'my/orders/:id', component: OrderDetailsComponent, canActivate: [AuthGuard] },
   { path: 'shopping-cart', component: ShoppingCartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'admin/products/new', component: ProductFormComponent },
-  { path: 'admin/products/:id', component: ProductFormComponent },
-  { path: 'admin/products', component: AdminProductsComponent },
-  { path: 'admin/orders', component: AdminOrdersComponent },
-  { path: 'admin/orders/:id', component: OrderDetailsComponent },
+  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard] },
+  { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard] },
+  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard] },
+  { path: 'admin/orders/:id', component: OrderDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'not_found', component: ErrorPageComponent, data: { message: 'This page can’t be reached'} },
+  { path: '**', redirectTo: '/not_found' }
 
 ];
 

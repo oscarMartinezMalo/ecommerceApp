@@ -3,6 +3,7 @@ import { OrderService } from '../order/order.service';
 import { AuthService } from '../auth/auth.service';
 import { take } from 'rxjs/operators';
 import { Order } from '../check-out/order.model';
+import { UserNotAuthenticated } from '../common/user-not-authenticated';
 
 @Component({
   selector: 'app-my-orders',
@@ -13,12 +14,12 @@ export class MyOrdersComponent implements OnInit {
   orders: Order[];
 
   constructor(
-    private orderService: OrderService,
-    private authService: AuthService
+    private orderService: OrderService
   ) { }
 
   async ngOnInit(): Promise<void> {
     this.orders = await this.orderService.getMyOrders();
   }
+
 }
 

@@ -9,7 +9,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th style="width: 80px;"></th>
+        <th style="width: 80px;" class="d-none d-md-table-cell"></th>
         <th class="text-center">Product</th>
         <th style="width: 230px;" class="text-center">Quantity</th>
         <th class="text-right">Price</th>
@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of cart?.items">
-        <td style="width: 80px;" >
+        <td style="width: 80px;"  class="d-none d-md-table-cell">
           <!-- <img [src]="item.product.imageUrl" class="thumbnail" alt=""> -->
           <div [style.backgroundImage]="'url(' + item.product.imageUrl +')'" class="thumbnail"></div>
         </td>
@@ -30,7 +30,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <th></th>
+        <th class="d-none d-md-table-cell"></th>
         <th></th>
         <th></th>
         <th class="text-right">{{ cart.totalPrice| currency:'USD':true }}</th>

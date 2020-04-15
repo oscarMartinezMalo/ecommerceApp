@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { take, map } from 'rxjs/operators';
-import { throwError, of, Observable, BehaviorSubject, Subject } from 'rxjs';
+import { take, map, tap } from 'rxjs/operators';
+import { throwError, of, Observable, BehaviorSubject, Subject, empty } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AppError } from '../common/app-error';
 import { UserExitsError } from '../common/user-exits-error';
 import { WrongCredentialError } from '../common/wrong-crendential-error';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserNotAuthenticated } from '../common/user-not-authenticated';
 
 interface EmailPassword {
   email: string;
@@ -31,27 +32,25 @@ interface LoginResponse {
 export class AuthService {
   readonly BASE_URL = 'http://localhost:3000/auth';
   readonly JWT_TOKEN = 'JWT_TOKEN';
-  readonly REFRESH_TOKEN  = 'REFRESH_TOKEN';
+  readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+  // Set to Undefined to check in the Guard when refresh the page
   user$: BehaviorSubject<User> = new BehaviorSubject(null);
-  // user$ = new Subject<string>();
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router
   ) {
-    // Send the token to get the user in case the user refresh the page
-    http.get(this.BASE_URL).pipe(take(1),
+    this.getUser().subscribe(user => { this.user$.next(user as User); });
+  }
+
+  getUser() {
+    return this.http.get(this.BASE_URL).pipe(
       catchError((error: Response) => {
-        if (error.status === 401) {
-          // Create User is Not Authenticated
-        } else {
-          return throwError(new AppError(error));
-        }
-      })).
-    subscribe(
-      user => this.user$.next( user as User ),
-      error => console.log('User Not Authenticated'));
+      return of(null);
+    }), map(user => {
+      return user;
+    }));
   }
 
   signup(emailPassword: EmailPassword) {
@@ -83,15 +82,17 @@ export class AuthService {
         }));
   }
 
-  // getToken() {
-  //   return localStorage.getItem(this.JWT_TOKEN);
-  // }
-
   refreshToken() {
-    this.http.get(this.BASE_URL + 'refresh').
-      pipe(take(1)).subscribe((token: { accessToken: string }) => {
+    const refreshToken = localStorage.getItem(this.REFRESH_TOKEN);
+
+    return this.http.post(this.BASE_URL + '/refresh-token', { refreshToken }).
+      pipe(take(1), tap((token: { accessToken: string }) => {
         localStorage.setItem(this.JWT_TOKEN, token.accessToken);
-      });
+      }));
+  }
+
+  get getStoredToken() {
+    return localStorage.getItem(this.JWT_TOKEN);
   }
 
   logOut() {

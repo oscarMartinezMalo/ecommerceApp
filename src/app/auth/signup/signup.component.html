@@ -1,12 +1,12 @@
 <form [formGroup]="signupForm" class="form-signup text-center" (ngSubmit)="onSubmit()" novalidate>
-  <img class="mb-4" src="../../../assets/iconRed.svg" alt="" width="72" height="72">
+  <img class="mb-4" src="../../../assets/icon.svg" alt="" width="72" height="72">
 
   <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
 
   <div class="form-label-group input-group-lg">
     <label for="inputEmail" class="sr-only">Email address</label>
     <input formControlName="email" type="email" id="inputEmail" class="form-control" placeholder="Email address"
-      autofocus>
+      autocomplete="username" autofocus>
     <!-- Errors -->
     <div class="alert alert-danger p-0 mb-0" role="alert"
       *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].hasError('required')">
@@ -22,7 +22,7 @@
   <div class="form-label-group  input-group-lg">
     <label for="inputPassword" class="sr-only">Password</label>
     <input formControlName="password" type="password" id="inputPassword" class="form-control" placeholder="Password"
-      required>
+      autocomplete="new-password" required>
     <!-- Errors -->
     <div *ngIf="signupForm.controls['password'].touched">
       <div class="alert alert-danger p-0 mb-0" role="alert"

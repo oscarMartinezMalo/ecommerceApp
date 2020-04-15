@@ -34,6 +34,9 @@ import { OrderService } from './order/order.service';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { ModalComponent } from './common/modal/modal.component';
+import { ErrorPageComponent } from './common/error-page/error-page.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,9 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     ProductQuantityComponent,
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    ModalComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +73,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
   ],
   providers: [
     AuthGuard,
+    AuthService,
     CategoryService,
     ProductService,
     ShoppingCartService,
