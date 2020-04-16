@@ -20,7 +20,6 @@ export class OrderService {
   }
 
   async getMyOrders() {
-    console.log('her');
     const result = await this.http.get(this.BASE_URL + 'by-user' ).toPromise() as Promise<Order[]>;
     return result;
   }

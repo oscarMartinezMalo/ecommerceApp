@@ -1,6 +1,6 @@
 <nav class="container-sm navbar navbar-expand-md navbar-light bg-transparent fixed-top">
   <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
-    <img src="../../../assets/icon.svg" style="width: 30px; height: 30px;">
+    <img src="../../../assets/icon.svg" style="height: 35px;">
   </a>
 
   <a  class="navbar-brand text-dark" [routerLink]="['/shopping-cart']">
@@ -28,17 +28,20 @@
         <a ngbDropdownToggle class="btn btn-dark btn-block text-center text-light" id="dropdown01" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">{{ user.email }}</a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" [routerLink]="['/my/orders']" routerLinkActive="router-link-active">My Orders</a>
-          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" [routerLink]="['/admin/orders']" routerLinkActive="router-link-active">Manage
+          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item"
+           [routerLink]="['/my/orders']" routerLinkActive="router-link-active">My Orders</a>
+          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" *ngIf="user.role === 'Admin'"
+           [routerLink]="['/admin/orders']" routerLinkActive="router-link-active">Manage
             Orders</a>
-          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" [routerLink]="['/admin/products']" routerLinkActive="router-link-active">Manage
+          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" *ngIf="user.role === 'Admin'"
+           [routerLink]="['/admin/products']" routerLinkActive="router-link-active">Manage
             Products</a>
-          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" (click)="logOut()">Log Out</a>
+          <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" (click)="logOut()" style="cursor: pointer">Log Out</a>
         </div>
       </li>
     </ul>
   </div>
 </nav>
-<main role="main" class="container-sm" style="margin-top: 90px;">
+<main role="main" style="height: 100%;" class="container">
   <ng-content></ng-content>
 </main>

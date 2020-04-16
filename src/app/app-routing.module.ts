@@ -18,7 +18,8 @@ import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 
 
 const routes: Routes = [
-  { path: '', component: ProductsComponent },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
   { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuard] },
@@ -34,7 +35,6 @@ const routes: Routes = [
   { path: 'admin/orders/:id', component: OrderDetailsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
   { path: 'not_found', component: ErrorPageComponent, data: { message: 'This page can’t be reached'} },
   { path: '**', redirectTo: '/not_found' }
-
 ];
 
 @NgModule({
