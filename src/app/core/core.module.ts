@@ -15,7 +15,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     NgbModule,
-    RouterModule.forChild([])
+    RouterModule.forChild([
+      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent},
+    ])
   ],
   exports: [
     NavbarComponent

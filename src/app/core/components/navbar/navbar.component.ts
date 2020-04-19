@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
 
   logOut() {
     this.authService.logOut();
-    this.router.navigate(['/']);
+    this.router.navigate(['/products']);
   }
 
 }
