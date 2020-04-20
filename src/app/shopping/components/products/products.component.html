@@ -3,8 +3,8 @@
     <app-product-filter [category]="category"></app-product-filter>
   </div>
   <div class="col">
-    <div class="row justify-content-md-around justify-content-center" *ngIf="cart$ | async as cart">
-      <div *ngFor="let product of filteredProducts">
+    <div @fadeEnter class="row justify-content-md-around justify-content-center" *ngIf="cart$ | async as cart">
+      <div *ngFor="let product of filteredProducts" class="products">
         <app-product-card [product]="product" [cart]="cart" [showActions]="true"></app-product-card>
       </div>
     </div>

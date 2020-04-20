@@ -16,7 +16,7 @@
           <th class="text-right">Price</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody @slide>
         <tr *ngFor="let item of cart?.items">
           <td style="width: 80px;" class="d-none d-md-table-cell">
             <!-- <img [src]="item.product.imageUrl" class="thumbnail" alt=""> -->
@@ -38,9 +38,10 @@
         </tr>
       </tfoot>
     </table>
-
-    <a *ngIf="cart.items?.length" class="btn btn-secondary btn-sm" [routerLink]="['/check-out']">
-      Check Out
-    </a>
+    <div  class="d-flex justify-content-end">
+      <a *ngIf="cart.items?.length" class="btn btn-secondary btn-sm m-5" [routerLink]="['/check-out']">
+        Check Out
+      </a>
+    </div>
   </ng-container>
 </div>

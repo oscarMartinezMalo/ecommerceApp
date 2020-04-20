@@ -6,11 +6,13 @@ import { switchMap } from 'rxjs/operators';
 import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
 import { ShoppingCart } from '../../../shared/models/shopping-cart.model';
 import { Observable } from 'rxjs';
+import { fadeEnter } from 'src/animations';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
+  animations: [ fadeEnter ]
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];

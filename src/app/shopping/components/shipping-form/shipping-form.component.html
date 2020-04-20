@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <form #f="ngForm" (ngSubmit)="placeOrder(f.value)" class="col" style="width: 700px;">
-      <h3> Shipping Information</h3>
+    <h3> Shipping Information</h3>
     <div class="form-group">
       <label for="name">Name</label>
       <input #name="ngModel" [(ngModel)]="shipping.name" name="name" id="name" type="text" class="form-control"
@@ -36,7 +36,8 @@
         City is <strong>required.</strong>
       </div>
     </div>
-
-    <button class="btn btn-dark mt-2 mb-2 " [disabled]="!f.form.valid">Save</button>
+    <div class="d-flex justify-content-start">
+      <button class="btn btn-dark mt-2 mb-2 " [disabled]="!f.form.valid">Save</button>
+    </div>
   </form>
 </div>

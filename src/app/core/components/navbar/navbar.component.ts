@@ -12,7 +12,7 @@ import { User } from 'shared/models/user.model';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isCollapsed = false;
+  isCollapsed = true;
   cart$: Observable<ShoppingCart>;
   user: User;
 
