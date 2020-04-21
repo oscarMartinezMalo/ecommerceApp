@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from 'shared/models/order.model';
 import { ShoppingCartService } from './shopping-cart.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  readonly BASE_URL = 'http://localhost:3000/orders/';
+  readonly BASE_URL = `${environment.baseUrl}orders/`;
   constructor(
     private http: HttpClient,
     private shoppingCart: ShoppingCartService

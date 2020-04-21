@@ -8,6 +8,7 @@ import { UserExitsError } from '../errors/user-exits-error';
 import { WrongCredentialError } from '../errors/wrong-crendential-error';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'shared/models/user.model';
+import { environment } from 'src/environments/environment';
 
 interface EmailPassword {
   email: string;
@@ -26,7 +27,7 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  readonly BASE_URL = 'http://localhost:3000/auth/';
+  readonly BASE_URL = `${environment.baseUrl}auth/`;
   readonly JWT_TOKEN = 'JWT_TOKEN';
   readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   // Set to Undefined to check in the Guard when refresh the page
@@ -61,7 +62,7 @@ export class AuthService {
   }
 
   login(emailPassword: EmailPassword) {
-    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/products';
 
     return this.http.post(this.BASE_URL + 'login', emailPassword).
       pipe(take(1), map((token: LoginResponse) => {

@@ -5,12 +5,13 @@ import { take } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { ShoppingCart } from '../models/shopping-cart.model';
 import { Item } from 'shared/models/item.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  readonly BASE_URL = 'http://localhost:3000/cart/';
+  readonly BASE_URL = `${environment.baseUrl}cart/`;
   cart$ = new Subject<ShoppingCart>();
 
   constructor(

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { take, catchError } from 'rxjs/operators';
-import { throwError, Observable } from 'rxjs';
+import { throwError } from 'rxjs';
 import { AppError } from 'shared/errors/app-error';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  readonly BASE_URL = 'http://localhost:3000/products/';
+  readonly BASE_URL = `${environment.baseUrl}products/`;
   constructor(
     private http: HttpClient
   ) { }
