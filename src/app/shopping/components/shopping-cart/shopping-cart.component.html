@@ -2,7 +2,7 @@
   <h1>Shopping Cart</h1>
   <ng-container *ngIf="cart$ | async as cart ">
     <p class="d-flex justify-content-between">
-      You have {{ cart.totalItemsCount }} items in your shopping cart.
+      <span>You have {{ cart.totalItemsCount }} items in your shopping cart.</span>
       <button *ngIf="cart.items?.length" class="btn btn-outline-danger btn-sm" (click)="clearCart()">
         Clear Shopping Cart
       </button>
@@ -39,7 +39,7 @@
       </tfoot>
     </table>
     <div  class="d-flex justify-content-end">
-      <a *ngIf="cart.items?.length" class="btn btn-secondary btn-sm m-5" [routerLink]="['/check-out']">
+      <a *ngIf="cart.items?.length" class="btn btn-secondary btn-sm mb-5" [routerLink]="['/check-out']">
         Check Out
       </a>
     </div>

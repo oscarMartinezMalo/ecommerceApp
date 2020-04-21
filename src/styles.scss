@@ -13,7 +13,7 @@ body {
 }
 
 .my-container{
-  padding-top: 50px;
+  // padding-top: 50px;
   width: 80%;
   margin: auto;
 }
@@ -30,4 +30,10 @@ body {
 main {
   text-align: center;
   position: relative;
+}
+
+@media only screen and (max-width: 600px) {
+  .my-container {
+    width: 98%;
+  }
 }
