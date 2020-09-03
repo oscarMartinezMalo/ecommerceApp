@@ -15,6 +15,8 @@ import { SharedModule } from 'shared/shared.module';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderDetailsComponent } from 'shared/components/order-details/order-details.component';
+import { SecureCheckoutComponent } from './secure-checkout/secure-checkoutcomponent';
+
 
 
 
@@ -27,7 +29,8 @@ import { OrderDetailsComponent } from 'shared/components/order-details/order-det
     ProductFilterComponent,
     ShoppingCartComponent,
     ShoppingCartSummaryComponent,
-    ShippingFormComponent
+    ShippingFormComponent,
+    SecureCheckoutComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { OrderDetailsComponent } from 'shared/components/order-details/order-det
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
       { path: 'my/orders/:id', component: OrderDetailsComponent, canActivate: [AuthGuard] },
       { path: 'shopping-cart', component: ShoppingCartComponent },
+      { path: 'secure-checkout', component: SecureCheckoutComponent }
     ])
   ]
 })

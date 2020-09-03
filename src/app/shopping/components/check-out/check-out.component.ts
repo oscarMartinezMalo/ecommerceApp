@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
 import { ShoppingCart } from '../../../shared/models/shopping-cart.model';
 import { Observable } from 'rxjs';

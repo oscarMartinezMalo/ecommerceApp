@@ -6,6 +6,8 @@ export class Order {
   _id: string;
   datePlaced: number;
   items: any[];
+  paypalOrderID: string;
+  paypalPayerID: string;
 
   constructor(public userId: string, public shipping: Shipping, shoppingCart: ShoppingCart) {
     this.datePlaced = new Date().getTime();
@@ -13,6 +15,7 @@ export class Order {
     this.items = shoppingCart.items.map(i => {
       return {
         product: {
+          id: i.product.id,
           title: i.product.title,
           imageUrl: i.product.imageUrl,
           price: i.product.price
