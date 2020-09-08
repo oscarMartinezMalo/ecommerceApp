@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaderResponse } from '@angular/common/http';
 import { Order } from 'shared/models/order.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { environment } from 'src/environments/environment';
+import { catchError, map } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +20,19 @@ export class OrderService {
   ) { }
 
   // If the order capture in the backend is fine Store the order.
-  async storeOrder(paypalOrderID, paypalPayerID) {
+  storeOrder(paypalOrderID, paypalPayerID) {
     this.currentOrder.paypalPayerID = paypalPayerID;
     this.currentOrder.paypalOrderID = paypalOrderID;
 
-    const resp = await this.http.post(this.BASE_URL, this.currentOrder).toPromise() as Promise<{ orderId: string, paypalUrl: string }>;
-    this.shoppingCart.clearCart();
+    // const resp = await this.http.post(this.BASE_URL, this.currentOrder).toPromise() as Promise<{ orderPaidID: string }>;
+    const resp = this.http.post(this.BASE_URL, this.currentOrder).pipe(
+      map(res => {
+        this.shoppingCart.clearCart();
+        return res;
+      }),
+      catchError(this.handleError)
+    );
+
     return resp;
   }
 
@@ -51,5 +60,9 @@ export class OrderService {
   async getOrderById( orderId: string) {
     const result = await this.http.get(this.BASE_URL + 'by-order-id/' + orderId).toPromise() as Promise<Order>;
     return result;
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(error.message || 'Something bad happened; please try again later.');
   }
 }

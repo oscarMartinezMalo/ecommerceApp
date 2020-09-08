@@ -16,6 +16,7 @@ declare var paypal;
 export class SecureCheckoutComponent implements OnInit {
   @ViewChild('paypal', { static: true }) paypalRef: ElementRef;
   cart$: Observable<ShoppingCart>;
+  spinner = 'none';
 
   constructor(
     private orderService: OrderService,
@@ -42,10 +43,17 @@ export class SecureCheckoutComponent implements OnInit {
         // This function sets up the details of the transaction,including the amount and line item details.
         return actions.order.create({ purchase_units });
       },
-      onApprove: async (data, actions) => {
+      onApprove: (data, actions) => {
+        this.spinner = 'block';
         // Send the order object to the backend
-       let resp = this.orderService.storeOrder(data.orderID, data.payerID);
-        console.log(resp);
+        this.orderService.storeOrder(data.orderID, data.payerID)
+        .subscribe((resp: { orderPaidID: string }) => {
+          this.router.navigate(['/order-success', resp.orderPaidID]);
+        },
+        error => {
+          this.spinner = 'none';
+          console.log('err', error);
+        });
       },
     }).render(this.paypalRef.nativeElement);
   }

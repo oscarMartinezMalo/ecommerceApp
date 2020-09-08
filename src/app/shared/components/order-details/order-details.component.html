@@ -38,15 +38,11 @@
         </li>
         <li class="list-group-item">
           <!-- <div class="float-left mr-5"> Address </div> -->
-          <div class="float-left">{{order.shipping.address}}</div>
-        </li>
-        <li class="list-group-item">
-          <!-- <div class="float-left mr-5"> Apartment/Suit </div> -->
-          <div class="float-left">{{order.shipping.apartment}}</div>
+          <div class="float-left">{{order.shipping.address}}, {{order.shipping.apartment}}</div>
         </li>
         <li class="list-group-item">
           <!-- <div class="float-left  mr-5"> City </div> -->
-          <div class="float-left">{{order.shipping.city}}</div>
+          <div class="float-left">{{order.shipping.zipCode}}, {{order.shipping.city}}, {{order.shipping.state}}, {{order.shipping.country}}</div>
         </li>
       </ul>
     </div>
