@@ -6,9 +6,7 @@ import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({  providedIn: 'root' })
 export class OrderService {
   readonly BASE_URL = `${environment.baseUrl}orders/`;
   paypalOrder;
