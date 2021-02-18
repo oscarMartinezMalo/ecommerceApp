@@ -23,6 +23,11 @@ interface LoginResponse {
   refreshToken: string;
 }
 
+interface ResetPassword {
+  currentPassword: string,
+  newPassword: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -70,6 +75,21 @@ export class AuthService {
         localStorage.setItem(this.REFRESH_TOKEN, token.refreshToken);
         this.user$.next({ id: token.id, email: token.email, role: token.role });
         this.router.navigate([returnUrl]);
+      }),
+        catchError((error: Response) => {
+          if (error.status === 403) {
+            return throwError(new WrongCredentialError());
+          }
+          return throwError(new AppError(error));
+        }));
+  }
+
+  resetPassword(resetPassword: ResetPassword ){
+    return this.http.post(this.BASE_URL + 'resetPassword', resetPassword).
+      pipe(take(1), map((token: LoginResponse) => {
+        localStorage.setItem(this.JWT_TOKEN, token.accessToken);
+        localStorage.setItem(this.REFRESH_TOKEN, token.refreshToken);
+        this.user$.next({ id: token.id, email: token.email, role: token.role });
       }),
         catchError((error: Response) => {
           if (error.status === 403) {

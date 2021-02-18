@@ -36,6 +36,9 @@
           <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" *ngIf="user.role === 'Admin'"
            [routerLink]="['/admin/products']" routerLinkActive="router-link-active">Manage
             Products</a>
+            <a (click)="isCollapsed = !isCollapsed" class="dropdown-item"
+              [routerLink]="['/reset-password']" routerLinkActive="router-link-active">Reset Password</a>
+              
           <a (click)="isCollapsed = !isCollapsed" class="dropdown-item" (click)="logOut()" style="cursor: pointer">Log Out</a>
         </div>
       </li>
