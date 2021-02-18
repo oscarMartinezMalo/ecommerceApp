@@ -15,6 +15,7 @@ import { AuthService } from 'shared/services/auth.service';
 export class ResetPasswordComponent implements OnInit {
 
   resetPasswordForm;
+  errorMessage='';
 
   constructor(    
     private fb: FormBuilder,
@@ -52,7 +53,7 @@ export class ResetPasswordComponent implements OnInit {
           if (error instanceof WrongCredentialError) {
             this.resetPasswordForm.setErrors({ userPass: true });
           } else { 
-            this.resetPasswordForm.setErrors({ userPass: true });
+            this.errorMessage =  error.getErrorMessage();
            }
         });
     }
