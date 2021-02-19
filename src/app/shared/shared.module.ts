@@ -18,6 +18,7 @@ import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     ProductQuantityComponent,
     OrderDetailsComponent,
     ModalComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ConfirmModalComponent
   ],
   imports: [
     CommonModule,
