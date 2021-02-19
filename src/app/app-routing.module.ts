@@ -7,7 +7,6 @@ const routes: Routes = [
   // { path: 'home', component: HomeComponent },
   // { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
-
   { path: 'not_found', component: ErrorPageComponent, data: { message: 'This page can’t be reached'} },
   { path: '**', redirectTo: '/not_found' }
 ];
