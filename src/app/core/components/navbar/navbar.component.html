@@ -18,10 +18,10 @@
   <div  [ngbCollapse]="isCollapsed" class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
     <ul class="navbar-nav">
       <li class="nav-item mr-md-2" *ngIf="!user">
-        <a  (click)="isCollapsed = !isCollapsed" class="btn btn-light btn-block" [routerLink]="['/login']" routerLinkActive="btn-dark">Login</a>
+        <a  (click)="isCollapsed = !isCollapsed" class="btn btn-light btn-block" [routerLink]="['/login']" routerLinkActive="btn-dark">Sign-In</a>
       </li>
       <li class="nav-item" *ngIf="!user">
-        <a  (click)="isCollapsed = !isCollapsed" class="btn btn-light btn-block" [routerLink]="['/signup']" routerLinkActive="btn-dark">Signup</a>
+        <a  (click)="isCollapsed = !isCollapsed" class="btn btn-light btn-block" [routerLink]="['/signup']" routerLinkActive="btn-dark">SignUp</a>
       </li>
 
       <li ngbDropdown class="nav-item dropdown" *ngIf="user">

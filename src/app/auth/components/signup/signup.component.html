@@ -37,6 +37,7 @@
   </div>
 
   <button class="btn btn-lg btn-dark btn-block" type="submit">Sign up</button>
+  <p class="mt-2 mb-3 text-center" >Already have an account? <a [routerLink]="['/login']">Sign-In</a></p>
   <p class="mt-5 mb-3 text-muted">&copy; 2020-2031</p>
   <!-- Form Error -->
   <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="signupForm.hasError('accountExit')">

@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmValidatorDirective } from './components/confirm-validator.directive';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthGuard } from 'shared/services/auth-guard.service';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 
 
@@ -15,7 +16,8 @@ import { AuthGuard } from 'shared/services/auth-guard.service';
     LoginComponent,
     SignupComponent,
     ConfirmValidatorDirective,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { AuthGuard } from 'shared/services/auth-guard.service';
     RouterModule.forChild([
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
-      { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuard] }
+      { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuard] },
+      { path: 'forgot-password', component: ForgotPasswordComponent }
     ])
   ]
 })
