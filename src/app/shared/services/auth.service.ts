@@ -87,9 +87,22 @@ export class AuthService {
   resetPassword(resetPassword: ResetPassword ){
     return this.http.post(this.BASE_URL + 'resetPassword', resetPassword).
       pipe(take(1), map((token: LoginResponse) => {
-        localStorage.setItem(this.JWT_TOKEN, token.accessToken);
-        localStorage.setItem(this.REFRESH_TOKEN, token.refreshToken);
-        this.user$.next({ id: token.id, email: token.email, role: token.role });
+        // localStorage.setItem(this.JWT_TOKEN, token.accessToken);
+        // localStorage.setItem(this.REFRESH_TOKEN, token.refreshToken);
+        // this.user$.next({ id: token.id, email: token.email, role: token.role });
+      }),
+        catchError((error: Response) => {
+          if (error.status === 403) {
+            return throwError(new WrongCredentialError());
+          }
+          return throwError(new AppError(error));
+        }));
+  }
+
+  forgotPassword( email: string){
+    return this.http.post(this.BASE_URL + 'forgotPassword', {email}).
+      pipe(take(1), map((resp: any) => {
+        return resp;
       }),
         catchError((error: Response) => {
           if (error.status === 403) {
