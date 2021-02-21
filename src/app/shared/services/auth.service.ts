@@ -118,7 +118,7 @@ export class AuthService {
         return resp;
       }),
         catchError((error: Response) => {
-          if (error.status === 403) {
+          if (error.status === 403 || error.status === 401) {
             return throwError(new WrongCredentialError());
           }
           return throwError(new AppError(error));

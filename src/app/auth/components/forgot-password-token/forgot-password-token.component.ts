@@ -15,7 +15,8 @@ import { forbiddenNameValidator } from '../../services/customValidator.directive
 })
 export class ForgotPasswordTokenComponent implements OnInit {
   resetPasswordForm: FormGroup;
-  message: string;
+  messageSuccess: string;
+  messageError: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,16 +50,17 @@ export class ForgotPasswordTokenComponent implements OnInit {
       .subscribe(async resp => {        
         this.resetPasswordForm.get('newPassword').reset();
         this.resetPasswordForm.get('retypePassword').reset();
-        this.message = resp.message;
+        this.messageSuccess = resp.message;
       },
       (error: AppError) => {
         if (error instanceof WrongCredentialError) { 
-          this.resetPasswordForm.get('newPassword').reset();
-          this.resetPasswordForm.get('retypePassword').reset();
-          this.resetPasswordForm.setErrors({ userPass: true });
+          this.messageError = 'Token invalid, expired or wrong email';
          }else{
-          this.resetPasswordForm.setErrors({ userPass: true });
+           this.messageError = 'Something went wrong, password was not updated';
          }
+
+         this.resetPasswordForm.get('newPassword').reset();
+         this.resetPasswordForm.get('retypePassword').reset();
       });
     }
   }
