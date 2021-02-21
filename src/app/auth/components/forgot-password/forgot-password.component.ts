@@ -19,7 +19,7 @@ export class ForgotPasswordComponent implements OnInit {
     email: ['', [Validators.required, , forbiddenNameValidator()]]
   });
 
-  constructor(    
+  constructor(
       private fb: FormBuilder,
       private authService: AuthService
     ) { }
@@ -39,7 +39,7 @@ export class ForgotPasswordComponent implements OnInit {
             this.forgotPasswordForm.reset();
         },
         (error: AppError) => {
-          if (error instanceof WrongCredentialError) { this.forgotPasswordForm.setErrors({ userPass: true }); }
+            this.forgotPasswordForm.setErrors({ userPass: true });
         });
     }
   }
