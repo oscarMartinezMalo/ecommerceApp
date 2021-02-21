@@ -8,6 +8,7 @@ import { ConfirmValidatorDirective } from './components/confirm-validator.direct
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ForgotPasswordTokenComponent } from './components/forgot-password-token/forgot-password-token.component';
 
 
 
@@ -17,7 +18,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     SignupComponent,
     ConfirmValidatorDirective,
     ResetPasswordComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ForgotPasswordTokenComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuard] },
-      { path: 'forgot-password', component: ForgotPasswordComponent }
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'forgot-password-token/:token', component: ForgotPasswordTokenComponent }
     ])
   ]
 })

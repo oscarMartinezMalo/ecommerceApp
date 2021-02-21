@@ -21,27 +21,25 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(    
       private fb: FormBuilder,
-      private authService: AuthService,
-      private router: Router
+      private authService: AuthService
     ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
+    this.message = '';
 
     if (this.forgotPasswordForm.valid && this.forgotPasswordForm.touched) {
       const email = this.forgotPasswordForm.get('email').value.trim();
-      this.authService.forgotPassword( email )
+
+      this.authService.forgotPassword(email)
         .subscribe(resp => {
-            console.log(resp);
             this.message = resp.message;
             this.forgotPasswordForm.reset();
         },
         (error: AppError) => {
-          if (error instanceof WrongCredentialError) {
-            this.forgotPasswordForm.setErrors({ userPass: true });
-          } else { throw error; }
+          if (error instanceof WrongCredentialError) { this.forgotPasswordForm.setErrors({ userPass: true }); }
         });
     }
   }
