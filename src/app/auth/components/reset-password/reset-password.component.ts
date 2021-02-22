@@ -24,13 +24,10 @@ export class ResetPasswordComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal
   ) { 
-
     this.resetPasswordForm = this.fb.group({
       currentPassword: ['', [Validators.required,  Validators.minLength(6)]],
-      passwordGroup : this.fb.group({
         newPassword: ['', [Validators.required, Validators.minLength(6)]],
         retypePassword: ['', [Validators.required, Validators.minLength(6)]],
-       })
     });
   }
 
