@@ -15,12 +15,31 @@
             {{item.totalPrice | currency:'USD':true}}
           </div>
         </li>
+
+        <li class="list-group-item small font-weight-bold">
+          <div class="float-left mr-5">
+            Taxes
+          </div>
+          <div class="float-right">
+            {{cart.taxes | currency:'USD':true}}
+          </div>
+        </li>
+
+        <li class="list-group-item small font-weight-bold">
+          <div class="float-left mr-5">
+            Shipping & Handling
+          </div>
+          <div class="float-right">
+            {{cart.shipping | currency:'USD':true}}
+          </div>
+        </li>
+
         <li class="list-group-item font-weight-bold">
           <div class="float-left">
             Total
           </div>
           <div class="float-right">
-            {{cart.totalPrice | currency:'USD':true}}
+            {{cart.totalPriceTaxesShipping | currency:'USD':true}}
           </div>
         </li>
       </ul>
