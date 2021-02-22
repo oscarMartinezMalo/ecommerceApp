@@ -6,6 +6,7 @@ import { ModalComponent } from 'shared/components/modal/modal.component';
 import { AppError } from 'shared/errors/app-error';
 import { WrongCredentialError } from 'shared/errors/wrong-crendential-error';
 import { AuthService } from 'shared/services/auth.service';
+import { ConfirmValidatorDirective } from '../confirm-validator.directive';
 
 @Component({
   selector: 'app-reset-password',
@@ -26,8 +27,10 @@ export class ResetPasswordComponent implements OnInit {
 
     this.resetPasswordForm = this.fb.group({
       currentPassword: ['', [Validators.required,  Validators.minLength(6)]],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      retypePassword: ['', [Validators.required, Validators.minLength(6)]],
+      passwordGroup : this.fb.group({
+        newPassword: ['', [Validators.required, Validators.minLength(6)]],
+        retypePassword: ['', [Validators.required, Validators.minLength(6)]],
+       })
     });
   }
 
