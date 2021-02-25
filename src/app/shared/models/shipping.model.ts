@@ -1,3 +1,4 @@
+import { EmailValidator } from "@angular/forms";
 
 export interface Shipping {
   name: string;
@@ -7,4 +8,6 @@ export interface Shipping {
   city: string;
   state: string;
   country: string;
+  phone:  number;
+  email: string;
 }

@@ -40,6 +40,9 @@ export class ForgotPasswordTokenComponent implements OnInit {
     this.resetPasswordForm.get('email').markAsTouched();
     this.resetPasswordForm.get('newPassword').markAsTouched();
     this.resetPasswordForm.get('retypePassword').markAsTouched();
+    this.messageSuccess = '';
+    this.messageError ='';
+
     const forgotPasswordToken = this.route.snapshot.paramMap.get('token');
 
     if (this.resetPasswordForm.valid && this.resetPasswordForm.touched) {
