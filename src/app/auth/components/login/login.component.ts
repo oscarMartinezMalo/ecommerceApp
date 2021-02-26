@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../shared/services/auth.service';
-import { forbiddenNameValidator } from '../../services/customValidator.directive';
+import { forbiddenNameValidator } from '../../../shared/services/customValidator.directive';
 import { Router } from '@angular/router';
 import { AppError } from 'src/app/shared/errors/app-error';
 import { WrongCredentialError } from 'src/app/shared/errors/wrong-crendential-error';

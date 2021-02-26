@@ -6,7 +6,7 @@ import { ModalComponent } from 'shared/components/modal/modal.component';
 import { AppError } from 'shared/errors/app-error';
 import { WrongCredentialError } from 'shared/errors/wrong-crendential-error';
 import { AuthService } from 'shared/services/auth.service';
-import { forbiddenNameValidator } from '../../services/customValidator.directive';
+import { forbiddenNameValidator } from '../../../shared/services/customValidator.directive';
 
 @Component({
   selector: 'app-forgot-password-token',

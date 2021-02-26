@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'shared/components/modal/modal.component';
@@ -15,7 +15,7 @@ import { ConfirmValidatorDirective } from '../confirm-validator.directive';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  resetPasswordForm;
+  resetPasswordForm: FormGroup;
   errorMessage='';
 
   constructor(    
@@ -35,9 +35,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    this.resetPasswordForm.get('currentPassword').markAsTouched();
-    this.resetPasswordForm.get('newPassword').markAsTouched();
-    this.resetPasswordForm.get('retypePassword').markAsTouched();
+    this.resetPasswordForm.markAllAsTouched();
 
     if (this.resetPasswordForm.valid && this.resetPasswordForm.touched) {
       const currentPassword = this.resetPasswordForm.get('currentPassword').value.trim();

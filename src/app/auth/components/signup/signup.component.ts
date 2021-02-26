@@ -4,7 +4,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { AppError } from 'src/app/shared/errors/app-error';
 import { UserExitsError } from 'src/app/shared/errors/user-exits-error';
-import { forbiddenNameValidator } from '../../services/customValidator.directive';
+import { forbiddenNameValidator } from '../../../shared/services/customValidator.directive';
 
 @Component({
   selector: 'app-signup',
