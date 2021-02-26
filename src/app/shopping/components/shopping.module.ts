@@ -10,7 +10,7 @@ import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-c
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'shared/shared.module';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,6 +35,7 @@ import { SecureCheckoutComponent } from './secure-checkout/secure-checkoutcompon
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       { path: 'products', component: ProductsComponent },
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },

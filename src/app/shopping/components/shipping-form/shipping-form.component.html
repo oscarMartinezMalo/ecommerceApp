@@ -1,85 +1,114 @@
-<div class="row justify-content-center">
-  <form #f="ngForm" (ngSubmit)="createOrder(f.value)" class="col" style="width: 700px;">
-    <h3> Shipping Information</h3>
-    <div class="form-group">
-      <label for="name">Full Name</label>
-      <input #name="ngModel" [(ngModel)]="shipping.name" name="name" id="name" type="text" class="form-control"
-        required />
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="name.touched && name.invalid">
-        Name is <strong>required.</strong>
+<form [formGroup]="shippingForm" class="form-signin my-container" (ngSubmit)="onSubmit()" novalidate>
+     <h3> Shipping Information</h3>
+  
+    <div class="form-group text-left row">
+      <label for="name" class="col-sm-2">Name</label>
+      <div class="col-sm-10">
+        <input formControlName="name" type="name" id="name" class="form-control form-control-sm" placeholder="Enter Full Name" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['name'].touched && shippingForm.controls['name'].hasError('required')">
+          Full Name is <strong>Required</strong>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="address">Address</label>
-      <input #address="ngModel" [(ngModel)]="shipping.address" name="address" id="address" type="text"
-        class="form-control" required />
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="address.touched && address.invalid">
-        Address is <strong>required.</strong>
+    <div class="form-group text-left row">
+      <label for="address" class="col-sm-2">Address</label>
+      <div class="col-sm-10">
+        <input formControlName="address" type="address" id="address" class="form-control form-control-sm" placeholder="Enter address" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['address'].touched && shippingForm.controls['address'].hasError('required')">
+          Address is <strong>Required</strong>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="apartment">Suit or Aparment</label>
-      <input #apartment="ngModel" [(ngModel)]="shipping.apartment" name="apartment" id="apartment" type="text"
-        class="form-control" required />
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="apartment.touched && apartment.invalid">
-        Apartment is <strong>required.</strong>
+    <div class="form-group text-left row">
+      <label for="apartment" class="col-sm-2">Apartment</label>
+      <div class="col-sm-10">
+        <input formControlName="apartment" type="suit" id="apartment" class="form-control form-control-sm" placeholder="Enter Apartment or Suit" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['apartment'].touched && shippingForm.controls['apartment'].hasError('required')">
+          Suit or Apartment is <strong>Required</strong>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="city">Zip Code</label>
-      <input #zipCode="ngModel" [(ngModel)]="shipping.zipCode" name="zipCode" id="zipCode" type="text" class="form-control" required />
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="zipCode.touched && zipCode.invalid">
-        Zip Code is <strong>required.</strong>
+    <div class="form-group text-left row">
+      <label for="zipCode" class="col-sm-2">ZipCode</label>
+      <div class="col-sm-10">
+        <input formControlName="zipCode" type="zipCode" id="zipCode" class="form-control form-control-sm" placeholder="Enter Zip Code" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['zipCode'].touched && shippingForm.controls['zipCode'].hasError('required')">
+          Zip Code is <strong>Required</strong>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="city">City</label>
-      <input #city="ngModel" [(ngModel)]="shipping.city" name="city" id="city" type="text" class="form-control"
-        required />
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="city.touched && city.invalid">
-        City is <strong>required.</strong>
+    <div class="form-group text-left row">
+      <label for="city" class="col-sm-2">City</label>
+      <div class="col-sm-10">
+        <input formControlName="city" type="city" id="city" class="form-control form-control-sm" placeholder="Enter City" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['city'].touched && shippingForm.controls['city'].hasError('required')">
+          City is <strong>Required</strong>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="state">State</label>
-      <input #state="ngModel" [(ngModel)]="shipping.state" name="state" id="state" type="text" class="form-control" required readonly/>
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="state.touched && state.invalid">
-        State is <strong>required.</strong>
+    <div class="form-group text-left row">
+      <label for="state" class="col-sm-2">State</label>
+      <div class="col-sm-10">
+        <input formControlName="state" type="state" id="state" class="form-control form-control-sm" placeholder="Enter State" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['state'].touched && shippingForm.controls['state'].hasError('required')">
+          State is <strong>Required</strong>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="country">Country</label>
-      <input #country="ngModel" [(ngModel)]="shipping.country" name="country" id="country" type="text" class="form-control" required readonly/>
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="country.touched && country.invalid">
-        Country is <strong>required.</strong>
+    <div class="form-group text-left row">
+      <label for="country" class="col-sm-2">Country</label>
+      <div class="col-sm-10">
+        <input formControlName="country" type="country" id="country" class="form-control form-control-sm" placeholder="Enter Country" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['country'].touched && shippingForm.controls['country'].hasError('required')">
+          Country is <strong>Required</strong>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="phone">Phone</label>
-      <input #phone="ngModel" [(ngModel)]="shipping.phone" name="phone" id="phone" type="text" class="form-control" required/>
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="phone.touched && phone.invalid">
-        Phone is <strong>required.</strong>
+    <div class="form-group text-left row">
+      <label for="phone" class="col-sm-2">Phone</label>
+      <div class="col-sm-10">
+        <input formControlName="phone" type="phone" id="phone" class="form-control form-control-sm" placeholder="Enter Phone" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['phone'].touched && shippingForm.controls['phone'].hasError('required')">
+          Phone is <strong>Required</strong>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input #email="ngModel" [(ngModel)]="shipping.email" name="email" id="email" type="text" class="form-control" required/>
-      <div class="alert alert-danger p-0 mb-0" role="alert" *ngIf="email.touched && email.invalid">
-        Email is <strong>required.</strong>
+    <div class="form-group text-left row">
+      <label for="email" class="col-sm-2">Email</label>
+      <div class="col-sm-10">
+        <input formControlName="email" type="email" id="email" class="form-control form-control-sm" placeholder="Enter Email" autofocus>
+  
+        <div class="alert alert-danger p-0 pl-2 mb-0" role="alert"
+          *ngIf="shippingForm.controls['email'].touched && shippingForm.controls['email'].hasError('required')">
+          Email is <strong>Required</strong>
+        </div>
       </div>
     </div>
-
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-dark mt-2 mb-2 " [disabled]="!f.form.valid"> Continue Check Out</button>
-    </div>
+  
+    <button class="btn btn-lg btn-dark btn-block" type="submit">Continue Check Out</button>
   </form>
-</div>
-
+  
