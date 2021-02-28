@@ -14,6 +14,7 @@ export class ProductFormComponent implements OnInit {
   categories$;
   product: Product = {};
   id: string;
+  selectedFile: File = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,11 +32,24 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  async onSave( product) {
-    if ( this.id) {
+  onFileSelected(event){
+    this.selectedFile = event.target.files[0];
+  }
+
+  async onSave( product: Product) {    
+    // Submit the form as FormData to also send files
+    const formData = new FormData();
+    formData.append('title', product.title);
+    formData.append('price', product.price.toString());
+    formData.append('category', product.category );
+    formData.append('imageUrl', product.imageUrl);
+    formData.append('files', this.selectedFile, this.selectedFile.name);
+
+    if ( this.id ) {
       await this.productService.update(this.id, product);
     } else {
-      await this.productService.create(product);
+      // await this.productService.create(product);
+      await this.productService.create(formData);
     }
     this.router.navigate(['/admin/products']);
   }

@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.signinForm.get('password').markAsTouched();
+    this.signinForm.markAllAsTouched();
 
     if (this.signinForm.valid && this.signinForm.touched) {
       const email = this.signinForm.get('email').value.trim();

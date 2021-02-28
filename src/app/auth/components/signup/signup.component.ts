@@ -29,6 +29,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.signupForm.get('password').markAsTouched();
+    this.signupForm.markAllAsTouched();
 
     if (this.signupForm.valid && this.signupForm.touched) {
       const email = this.signupForm.get('email').value.trim();
@@ -44,5 +45,4 @@ export class SignupComponent implements OnInit {
           });
     }
   }
-
 }
