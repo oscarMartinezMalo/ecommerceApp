@@ -75,8 +75,9 @@ export class ProductFormComponent implements OnInit {
     if( this.selectedFileTwo ) imageList.push(this.selectedFileTwo);
     if( this.selectedFileThird ) imageList.push(this.selectedFileThird);
 
-    if(imageList.length <= 1) { 
-      // Show a message that at least one Image is required
+    if(imageList.length < 1) { 
+     alert("You have to select at least one Image")
+     return;      
     }
 
     imageList.forEach(image =>{ formData.append('files', image, image.name); }) // Add each image from the list to the FormData
