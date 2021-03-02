@@ -14,7 +14,14 @@ export class ProductFormComponent implements OnInit {
   categories$;
   product: Product = {};
   id: string;
-  selectedFile: File = null;
+  selectedFileOne: File = null;
+  selectedFileTwo: File = null;
+  selectedFileThird: File = null;
+
+  urlImageOne = './assets/addProduct.png';
+  urlImageTwo: string = './assets/addProduct.png';
+  urlImageThird: string = './assets/addProduct.png';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -33,8 +40,26 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void { }
 
   onFileSelected(event){
-    this.selectedFile = event.target.files[0];
+    if(event.target.id ==='imageOne'){
+      this.selectedFileOne = event.target.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(this.selectedFileOne);
+      reader.onload = (e: any)=>{ this.urlImageOne = e.target.result;}
+    } 
+    if(event.target.id ==='imageTwo') {
+      this.selectedFileTwo = event.target.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(this.selectedFileTwo);
+      reader.onload = (e: any)=>{ this.urlImageTwo = e.target.result;}
+    }
+    if(event.target.id ==='imageThird'){
+      this.selectedFileThird = event.target.files[0]; 
+      let reader = new FileReader();
+      reader.readAsDataURL(this.selectedFileThird);
+      reader.onload = (e: any)=>{ this.urlImageThird = e.target.result;}
+    } 
   }
+
 
   async onSave( product: Product) {    
     // Submit the form as FormData to also send files
@@ -43,12 +68,22 @@ export class ProductFormComponent implements OnInit {
     formData.append('price', product.price.toString());
     formData.append('category', product.category );
     formData.append('imageUrl', product.imageUrl);
-    formData.append('files', this.selectedFile, this.selectedFile.name);
+
+    // Append Images to the FormData
+    let imageList: File[] = [];
+    if( this.selectedFileOne ) imageList.push(this.selectedFileOne);
+    if( this.selectedFileTwo ) imageList.push(this.selectedFileTwo);
+    if( this.selectedFileThird ) imageList.push(this.selectedFileThird);
+
+    if(imageList.length <= 1) { 
+      // Show a message that at least one Image is required
+    }
+
+    imageList.forEach(image =>{ formData.append('files', image, image.name); }) // Add each image from the list to the FormData
 
     if ( this.id ) {
       await this.productService.update(this.id, product);
     } else {
-      // await this.productService.create(product);
       await this.productService.create(formData);
     }
     this.router.navigate(['/admin/products']);
