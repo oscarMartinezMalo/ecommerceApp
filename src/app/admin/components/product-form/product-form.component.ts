@@ -62,6 +62,7 @@ export class ProductFormComponent implements OnInit {
 
 
   async onSave( product: Product) {    
+    console.log(this.fileList);
     // Submit the form as FormData to also send files
     const formData = new FormData();
     formData.append('title', product.title);
@@ -82,12 +83,12 @@ export class ProductFormComponent implements OnInit {
 
     imageList.forEach(image =>{ formData.append('files', image, image.name); }) // Add each image from the list to the FormData
 
-    if ( this.id ) {
-      await this.productService.update(this.id, product);
-    } else {
-      await this.productService.create(formData);
-    }
-    this.router.navigate(['/admin/products']);
+    // if ( this.id ) {
+    //   await this.productService.update(this.id, product);
+    // } else {
+    //   await this.productService.create(formData);
+    // }
+    // this.router.navigate(['/admin/products']);
   }
 
   async delete() {
@@ -95,6 +96,12 @@ export class ProductFormComponent implements OnInit {
       await this.productService.delete(this.id);
       this.router.navigate(['/admin/products']);
     }
+  }
+
+  fileList: {file:File, imageUrl:string}[];
+
+  getfileList(imagesList){
+    this.fileList = imagesList;
   }
 
 }

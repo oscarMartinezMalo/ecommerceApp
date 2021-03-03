@@ -19,6 +19,7 @@ import { ProductService } from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { FileUpdateComponent } from './components/file-update/file-update.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     OrderDetailsComponent,
     ModalComponent,
     ErrorPageComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    FileUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,8 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     OrderDetailsComponent,
     FormsModule,
     NgbModule,
+    ConfirmModalComponent,
+    FileUpdateComponent,
     RxReactiveFormsModule,
     ErrorPageComponent
   ],
