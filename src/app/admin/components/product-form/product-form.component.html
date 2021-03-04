@@ -51,33 +51,6 @@
         </div>
       </div>
 
-      <div class="form-group d-flex justify-content-between">
-        <div class="imageElement">
-          <input #imageOne style="display: none;" type="file" (change)="onFileSelected($event)" name="imageOne" id="imageOne" required/>
-          <img [src]="urlImageOne" class="imageUpload border border-secondary rounded" (click)="imageOne.click()">
-          <button *ngIf="selectedFileOne" type="button" class="close upload-close" aria-label="Close" (click)="selectedFileOne=null; urlImageOne='./assets/addProduct.png'">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="imageElement">
-          <input #imageTwo  style="display: none;"  type="file" (change)="onFileSelected($event)" name="imageTwo" id="imageTwo"/>
-          <img [src]="urlImageTwo" class="imageUpload border border-secondary rounded" (click)="imageTwo.click()">
-          <button *ngIf="selectedFileTwo" type="button" class="close upload-close" aria-label="Close" (click)="selectedFileTwo=null; urlImageTwo='./assets/addProduct.png'">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="imageElement">
-          <input #imageThird  style="display: none;"  type="file" (change)="onFileSelected($event)" name="imageThird" id="imageThird"/>
-          <img [src]="urlImageThird" class="imageUpload border border-secondary rounded" (click)="imageThird.click()">
-          <button *ngIf="selectedFileThird" type="button" class="close upload-close" aria-label="Close"  (click)="selectedFileThird=null; urlImageThird='./assets/addProduct.png'">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <!-- <label>{{selectedFileThird?.name}}</label> -->
-        </div>
-      </div>
-
       <app-file-update (newItemEvent)="getfileList($event)"></app-file-update>
 
       <div class="form-group d-flex justify-content-between">

@@ -4,6 +4,7 @@ import { ProductService } from 'shared/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Product } from 'shared/models/product.model';
+import { FileUrl } from 'shared/components/file-update/fileUrl.model';
 
 @Component({
   selector: 'app-product-form',
@@ -14,14 +15,7 @@ export class ProductFormComponent implements OnInit {
   categories$;
   product: Product = {};
   id: string;
-  selectedFileOne: File = null;
-  selectedFileTwo: File = null;
-  selectedFileThird: File = null;
-
-  urlImageOne = './assets/addProduct.png';
-  urlImageTwo: string = './assets/addProduct.png';
-  urlImageThird: string = './assets/addProduct.png';
-
+  fileList: FileUrl[];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,56 +33,23 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onFileSelected(event){
-    if(event.target.id ==='imageOne'){
-      this.selectedFileOne = event.target.files[0];
-      let reader = new FileReader();
-      reader.readAsDataURL(this.selectedFileOne);
-      reader.onload = (e: any)=>{ this.urlImageOne = e.target.result;}
-    } 
-    if(event.target.id ==='imageTwo') {
-      this.selectedFileTwo = event.target.files[0];
-      let reader = new FileReader();
-      reader.readAsDataURL(this.selectedFileTwo);
-      reader.onload = (e: any)=>{ this.urlImageTwo = e.target.result;}
-    }
-    if(event.target.id ==='imageThird'){
-      this.selectedFileThird = event.target.files[0]; 
-      let reader = new FileReader();
-      reader.readAsDataURL(this.selectedFileThird);
-      reader.onload = (e: any)=>{ this.urlImageThird = e.target.result;}
-    } 
-  }
-
-
   async onSave( product: Product) {    
-    console.log(this.fileList);
+    if(this.fileList.length < 1) { alert("You have to select at least one Image"); return; }
+
     // Submit the form as FormData to also send files
     const formData = new FormData();
     formData.append('title', product.title);
     formData.append('price', product.price.toString());
     formData.append('category', product.category );
     formData.append('imageUrl', product.imageUrl);
+    this.fileList.forEach(fileObj =>{ formData.append('files', fileObj.file, fileObj.file.name); })
 
-    // Append Images to the FormData
-    let imageList: File[] = [];
-    if( this.selectedFileOne ) imageList.push(this.selectedFileOne);
-    if( this.selectedFileTwo ) imageList.push(this.selectedFileTwo);
-    if( this.selectedFileThird ) imageList.push(this.selectedFileThird);
-
-    if(imageList.length < 1) { 
-     alert("You have to select at least one Image")
-     return;      
+    if ( this.id ) {
+      await this.productService.update(this.id, product);
+    } else {
+      await this.productService.create(formData);
     }
-
-    imageList.forEach(image =>{ formData.append('files', image, image.name); }) // Add each image from the list to the FormData
-
-    // if ( this.id ) {
-    //   await this.productService.update(this.id, product);
-    // } else {
-    //   await this.productService.create(formData);
-    // }
-    // this.router.navigate(['/admin/products']);
+    this.router.navigate(['/admin/products']);
   }
 
   async delete() {
@@ -98,10 +59,13 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  fileList: {file:File, imageUrl:string}[];
-
-  getfileList(imagesList){
+  getfileList(imagesList: FileUrl[]){    
+    console.log('prod', imagesList[0]);
     this.fileList = imagesList;
+    this.product.images = [];
+    imagesList.forEach(fileObj =>{ 
+      this.product.images.push( fileObj.imageUrl);
+     });
   }
 
 }
