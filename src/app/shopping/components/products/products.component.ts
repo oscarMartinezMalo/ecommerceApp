@@ -44,6 +44,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getAll()
       .pipe(
         switchMap((p: Product[]) => {
+          console.log(p);
           this.products = p;
           return this.route.queryParamMap;
         }))

@@ -72,10 +72,13 @@ export class ShoppingCartService {
 
   private createShoppingCart(cart) {
     const items = [];
-    // Add items to the items list
-    for (const cartItem of cart.items) {
-      const item = new Item(cartItem.quantity, cartItem.product);
-      items.push(item);
+
+    if( cart ) {
+      // Add items to the items list
+      for (const cartItem of cart.items) {
+        const item = new Item(cartItem.quantity, cartItem.product);
+        items.push(item);
+      }
     }
 
     return new ShoppingCart(items);

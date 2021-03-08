@@ -7,11 +7,11 @@ import { Product } from 'shared/models/product.model';
 import { FileUrl } from 'shared/components/file-update/fileUrl.model';
 
 @Component({
-  selector: 'app-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss']
+  selector: 'app-product-form-file',
+  templateUrl: './product-form-file.component.html',
+  styleUrls: ['./product-form-file.component.scss']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormFileComponent implements OnInit {
   categories$;
   product: Product = {};
   id: string;
@@ -34,20 +34,20 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void { }
 
   async onSave( product: Product) {    
-    // if(this.fileList.length < 1) { alert("You have to select at least one Image"); return; }
+    if(this.fileList.length < 1) { alert("You have to select at least one Image"); return; }
 
     // Submit the form as FormData to also send files
-    // const formData = new FormData();
-    // formData.append('title', product.title);
-    // formData.append('price', product.price.toString());
-    // formData.append('category', product.category );
+    const formData = new FormData();
+    formData.append('title', product.title);
+    formData.append('price', product.price.toString());
+    formData.append('category', product.category );
     // formData.append('imageUrl', product.imageUrl);
-    // this.fileList.forEach(fileObj =>{ formData.append('files', fileObj.file, fileObj.file.name); })
+    this.fileList.forEach(fileObj =>{ formData.append('files', fileObj.file, fileObj.file.name); })
 
     if ( this.id ) {
-      await this.productService.update(this.id, product);
+      await this.productService.update(this.id, formData);
     } else {
-      await this.productService.create(product);
+      await this.productService.create(formData);
     }
     this.router.navigate(['/admin/products']);
   }
@@ -57,5 +57,14 @@ export class ProductFormComponent implements OnInit {
       await this.productService.delete(this.id);
       this.router.navigate(['/admin/products']);
     }
+  }
+
+  getfileList(imagesList: FileUrl[]){    
+    console.log('prod', imagesList);
+    this.fileList = imagesList;
+    this.product.images = [];
+    imagesList.forEach(fileObj =>{ 
+      this.product.images.push( fileObj.imageUrl);
+     });
   }
 }
